@@ -318,6 +318,16 @@ Keycloak.prototype.logoutUrl = function (redirectUrl) {
   '?redirect_uri=' + encodeURIComponent(redirectUrl);
 };
 
+Keycloak.prototype.forwardedHeaderTokens = function (val) {
+  //Forwarded: by=<identifier>; for=<identifier>; host=<host>; proto=<http|https>
+  return {
+    "by": (val.match(/by=([^;]+)/) || [])[1],
+    "for": (val.match(/for=([^;]+)/) || [])[1],
+    "host": (val.match(/host=([^;]+)/) || [])[1],
+    "proto": (val.match(/proto=([^;]+)/) || [])[1]
+  };
+};
+
 Keycloak.prototype.accountUrl = function () {
   return this.config.realmUrl + '/account';
 };
