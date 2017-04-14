@@ -318,14 +318,18 @@ Keycloak.prototype.logoutUrl = function (redirectUrl) {
   '?redirect_uri=' + encodeURIComponent(redirectUrl);
 };
 
-Keycloak.prototype.forwardedHeaderTokens = function (val) {
-  //Forwarded: by=<identifier>; for=<identifier>; host=<host>; proto=<http|https>
-  return {
-    "by": (val.match(/by=([^;]+)/) || [])[1],
-    "for": (val.match(/for=([^;]+)/) || [])[1],
-    "host": (val.match(/host=([^;]+)/) || [])[1],
-    "proto": (val.match(/proto=([^;]+)/) || [])[1]
-  };
+Keycloak.prototype.forwardedHeaderTokens = function (val = '') {
+  //Forwarded: by=<identifier>; for=<identifier> [, for=<identifier>]; host=<host>; proto=<http|https>
+  const forwardedValRegex = /(by|for|host|proto)=(.+?); ?(by|for|host|proto)=(.+?); ?(by|for|host|proto)=(.+?); ?(by|for|host|proto)=(.+)/gi;
+  var [, k1, v1, k2, v2, k3, v3, k4, v4] = forwardedValRegex.exec(val) || [];
+  var tokens = {};
+  //Only first value of multiple identifiers/host/proto is returned.
+  tokens[k1] = v1 && v1.replace(/ /g, '').split(`,${k1}=`)[0];
+  tokens[k2] = v2 && v2.replace(/ /g, '').split(`,${k2}=`)[0];
+  tokens[k3] = v3 && v3.replace(/ /g, '').split(`,${k3}=`)[0];
+  tokens[k4] = v4 && v4.replace(/ /g, '').split(`,${k4}=`)[0];
+  delete tokens['undefined'];
+  return tokens;
 };
 
 Keycloak.prototype.accountUrl = function () {
