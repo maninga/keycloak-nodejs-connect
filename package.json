@@ -1,5 +1,5 @@
 {
-  "name": "keycloak-connect",
+  "name": "@hotelsoft/keycloak-connect",
   "version": "3.1.0",
   "description": "Keycloak Connect Middleware",
   "homepage": "http://keycloak.org",
@@ -33,7 +33,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "keycloak-auth-utils": "keycloak/keycloak-nodejs-auth-utils"
+    "keycloak-auth-utils": "3.1.0"
   },
   "bundledDependencies": [
     "keycloak-auth-utils"
