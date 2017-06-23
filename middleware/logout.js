@@ -27,12 +27,14 @@ module.exports = function (keycloak, logoutUrl) {
       delete request.kauth.grant;
     }
 
-    let host = request.hostname;
-    let headerHost = request.headers.host.split(':');
-    let port = headerHost[1] || '';
-    let protocol = keycloak.forwardedHeaderTokens(request.headers['forwarded']).proto ||
-        request.headers['x-forwarded-proto'] || request.protocol;
-    let redirectUrl = protocol + '://' + host + (port === '' ? '' : ':' + port) + '/';
+    //let host = request.hostname;
+    //let headerHost = request.headers.host.split(':');
+    //let port = headerHost[1] || '';
+    //let protocol = keycloak.forwardedHeaderTokens(request.headers['forwarded']).proto ||
+    //    request.headers['x-forwarded-proto'] || request.protocol;
+    //let redirectUrl = protocol + '://' + host + (port === '' ? '' : ':' + port) + '/';
+
+    let redirectUrl = request.headers.referer;
     let keycloakLogoutUrl = keycloak.logoutUrl(redirectUrl);
 
     response.redirect(keycloakLogoutUrl);
