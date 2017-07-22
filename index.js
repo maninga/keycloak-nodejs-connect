@@ -18,8 +18,8 @@ var BearerStore = require('./stores/bearer-store');
 var CookieStore = require('./stores/cookie-store');
 var SessionStore = require('./stores/session-store');
 
-var Config = require('keycloak-auth-utils').Config;
-var GrantManager = require('keycloak-auth-utils').GrantManager;
+var Config = require('@hotelsoft/keycloak-auth-utils').Config;
+var GrantManager = require('@hotelsoft/keycloak-auth-utils').GrantManager;
 
 var Setup = require('./middleware/setup');
 var Admin = require('./middleware/admin');
