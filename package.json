@@ -33,7 +33,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@hotelsoft/keycloak-auth-utils": "hotelsoft/keycloak-nodejs-auth-utils"
+    "@hotelsoft/keycloak-auth-utils": "maninga/keycloak-nodejs-auth-utils"
   },
   "bundledDependencies": [
     "@hotelsoft/keycloak-auth-utils"
